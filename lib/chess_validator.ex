@@ -1,20 +1,28 @@
 defmodule ChessValidator do
   def run() do
-    board_file = "complex_board.txt"
-    board_data = load_file(board_file)
+    board = 
+      "complex_board.txt"
+      |> load_file()
+      |> clean()
 
-    moves_file = "complex_moves.txt"
-    moves_data = load_file(moves_file)
+    moves =
+      "complex_moves.txt"
+      |> load_file()
+      |> clean()
 
     %{
-      board: board_data,
-      moves: moves_data
+      board: board,
+      moves: moves
     }
   end
 
   def load_file(file) do
     "../assets/" <> file
     |> Path.expand(__DIR__)
-    |> File.read!() 
+    |> File.read!()
+  end
+
+  def clean(data) do
+    data |> String.split("\n")
   end
 end
