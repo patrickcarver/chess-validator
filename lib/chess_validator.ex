@@ -23,6 +23,8 @@ defmodule ChessValidator do
   end
 
   def clean(data) do
-    data |> String.split("\n")
+    data 
+    |> String.split("\n") 
+    |> Enum.map(&(String.split(&1, " ")))
   end
 end
