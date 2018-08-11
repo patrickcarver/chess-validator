@@ -1,18 +1,20 @@
 defmodule ChessValidator do
-  @moduledoc """
-  Documentation for ChessValidator.
-  """
+  def run() do
+    board_file = "complex_board.txt"
+    board_data = load_file(board_file)
 
-  @doc """
-  Hello world.
+    moves_file = "complex_moves.txt"
+    moves_data = load_file(moves_file)
 
-  ## Examples
+    %{
+      board: board_data,
+      moves: moves_data
+    }
+  end
 
-      iex> ChessValidator.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def load_file(file) do
+    "../assets/" <> file
+    |> Path.expand(__DIR__)
+    |> File.read!() 
   end
 end
