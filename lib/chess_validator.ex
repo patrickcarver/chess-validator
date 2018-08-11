@@ -59,9 +59,24 @@ defmodule ChessValidator do
     end
   end
 
-
   def create_moves(data) do
-    data
+    data |> Enum.map(fn(pair) -> Enum.map(pair, fn (move) -> translate_move(move) end) end)
+  end
+
+  def translate_move(data) do
+    [column_txt, row_txt] = String.codepoints(data)
+    column = get_column(column_txt)
+    row = get_row(row_txt)
+    %{column: column, row: row}
+  end
+
+  def get_column(txt) do
+    code = txt |> to_charlist |> List.first
+    code - 97
+  end
+
+  def get_row(txt) do
+    8 - String.to_integer(txt)
   end
 
   def load_file(file) do
