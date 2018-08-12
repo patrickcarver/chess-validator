@@ -60,7 +60,11 @@ defmodule ChessValidator do
   end
 
   def create_moves(data) do
-    data |> Enum.map(fn(pair) -> Enum.map(pair, fn (move) -> translate_move(move) end) end)
+    data 
+    |> Enum.map(fn(pair) -> 
+        [origin, destination] = Enum.map(pair, &translate_move/1)
+        %{origin: origin, destination: destination} 
+       end)
   end
 
   def translate_move(data) do
